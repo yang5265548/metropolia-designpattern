@@ -17,5 +17,10 @@ public class Main {
         String exchangeRates="rates";
         String rates=apiFacade.getAttributeValueFromJson(exchangeURL, exchangeRates);
         System.out.println("Exchange Rates: " + rates);
+
+        System.out.println("try exception");
+        String invalidURL="https://api.fxratesapi.com/latest";
+        String invalidAttribute="invalid";
+        String invalidValue=apiFacade.getAttributeValueFromJson(invalidURL, invalidAttribute);
     }
 }

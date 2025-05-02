@@ -22,19 +22,23 @@ public class ApiFacade {
     }
 
     private String getJsonFormApi(String urlString) throws IOException {
-        URL url = new URL(urlString);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
 
-        try(BufferedReader in =new BufferedReader(new InputStreamReader(connection.getInputStream()))){
-            String inputLine;
-            StringBuilder content = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
+            try(BufferedReader in =new BufferedReader(new InputStreamReader(connection.getInputStream()))){
+                String inputLine;
+                StringBuilder content = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
+                }
+                return content.toString();
+            }finally {
+                connection.disconnect();
             }
-            return content.toString();
-        }finally {
-            connection.disconnect();
+        } catch (Exception e) {
+            throw new IOException("Failed to fetch or read from URL: " + urlString, e);
         }
     }
     private String parseJson(String json,String attributeName) throws ParseException {
