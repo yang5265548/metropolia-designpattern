@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="mediator.ChatClientController">
+    <left>
+        <ListView fx:id="userListView" prefWidth="150" />
+    </left>
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true">
+                <VBox fx:id="messageContainer" spacing="5" />
+            </ScrollPane>
+            <HBox spacing="5">
+                <TextField fx:id="messageField" HBox.hgrow="ALWAYS" promptText="Type a message..." />
+                <Button text="Send" onAction="#onSendMessage" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
